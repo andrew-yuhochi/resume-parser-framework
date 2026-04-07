@@ -77,3 +77,9 @@ To run the test suite:
 ```bash
 pytest -v
 ```
+
+## Notes on Extraction Accuracy
+
+While the Object-Oriented orchestration reliably routes and extracts data, the accuracy of the deterministic extractors (like the NER-based `NameExtractor`) is highly dependent on the input file's layout. 
+
+For example, standard PDF parsing often strips layout formatting and newline characters, which can cause adjacent text (e.g., a candidate's location) to be concatenated with their name if the NER model fails to isolate the entity. In a production environment, this would be mitigated by replacing the heuristic fallback with a dedicated LLM extraction call before text extraction.
